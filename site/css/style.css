@@ -113,6 +113,7 @@ a:hover { color: var(--red); }
 .chat-btn:hover { transform: translate(2px, 2px); box-shadow: 4px 4px 0 var(--ink); }
 .kakao-btn { background: var(--kakao); }
 .messenger-btn { background: #fff; }
+.chat-label { margin: 18px 0 0; text-align: center; color: #fff; font-family: var(--f-gothic); font-weight: 900; font-size: var(--fs-lead); }
 
 /* ===== Footer ===== */
 .site-footer { background: var(--ink); color: var(--cream); padding: 48px 0 96px; font-size: var(--fs-small); }

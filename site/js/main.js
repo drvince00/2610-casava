@@ -23,7 +23,7 @@ const T = {
     b4t: '면역·부기 완화', b4: '비타민 C와 칼륨이 면역력을 높이고 나트륨을 배출합니다.',
     storeTitle: '세부 판매처', storeLead: '숙소 근처에서 Casava를 만나보세요.',
     hoursLabel: '영업시간', mapLabel: '지도 보기',
-    kakao: '카카오톡으로 문의하기', messenger: '메신저로 문의하기',
+    chatLabel: '문의 및 견적',
     footerTag: '세부에서 온 바삭한 카사바칩', contactLabel: '연락처', addressLabel: '주소', inquiryLabel: '문의시간',
   },
   ja: {
@@ -38,7 +38,7 @@ const T = {
     b4t: '免疫・むくみケア', b4: 'ビタミンCとカリウムが免疫力を高め、ナトリウムの排出を助けます。',
     storeTitle: 'セブの販売店', storeLead: 'ホテルの近くでCasavaを見つけよう。',
     hoursLabel: '営業時間', mapLabel: '地図を見る',
-    kakao: 'カカオトークで問い合わせ', messenger: 'Messengerで問い合わせ',
+    chatLabel: 'お問い合わせ・お見積もり',
     footerTag: 'セブ生まれのサクサクキャッサバチップス', contactLabel: '連絡先', addressLabel: '住所', inquiryLabel: 'お問い合わせ時間',
   },
   en: {
@@ -53,7 +53,7 @@ const T = {
     b4t: 'Immunity & less puffiness', b4: 'Vitamin C and potassium support immunity and help flush out sodium.',
     storeTitle: 'Where to buy in Cebu', storeLead: 'Find Casava near your hotel.',
     hoursLabel: 'Hours', mapLabel: 'Open map',
-    kakao: 'Chat with us on KakaoTalk', messenger: 'Chat with us on Messenger',
+    chatLabel: 'Inquiries & Quotes',
     footerTag: 'Crunchy cassava chips from Cebu', contactLabel: 'Contact', addressLabel: 'Address', inquiryLabel: 'Inquiry hours',
   },
 };
