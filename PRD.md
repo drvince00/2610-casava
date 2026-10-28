@@ -104,7 +104,7 @@ casava-handoff/
 
 ## 7. 남은 일 (TODO)
 
-- [x] **카카오톡 채널 URL** → `site/data/links.json` 의 `kakao` (2026-10-28 연결)
+- [x] **카카오톡 채널 URL** → `site/data/links.json` 의 `kakao` (2026-10-28 연결 — 채팅방 직행 대신 채널 홈으로 링크)
 - [ ] **페이스북 메신저 URL** (예: `https://m.me/<페이지>`) → `site/data/links.json` 의 `messenger`. 비어 있는 동안 버튼은 숨겨짐
 - [ ] **판매처 실제 정보** (매장명 · 주소 · 영업시간 · 구글맵 링크) → `main.js` 의 `STORES`
   - 지역 태그 Mactan / Cebu City / Moalboal 는 예시. 실제 지역으로 교체
