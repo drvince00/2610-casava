@@ -27,7 +27,8 @@ npm run render    # ads/*.html → site/images/*.png 재생성 (Playwright Chrom
 
 - `site/` — 배포 대상 그 자체 (빌드 산출물이 아니라 원본). 배포 시 이 폴더를 그대로 업로드.
   - `css/style.css` — 색·폰트·글자 크기 토큰이 전부 `:root`에 있음. 폰트 세트와 크기는 `<html data-font-set="pop|friendly|comic">`, `<html data-scale="s|m|l">` 속성으로 전환. 일본어는 `html[lang="ja"]` 셀렉터가 폰트 스택을 바꿈.
-  - `js/main.js` — 설정(`KAKAO_URL`, `STORES`)과 다국어 문구 `T = { ko, ja, en }`가 맨 위에 있음.
+  - `js/main.js` — 설정(`STORES`)과 다국어 문구 `T = { ko, ja, en }`가 맨 위에 있음.
+  - `data/links.json` — 문의 링크(카카오톡 · 메신저). 소스에 하드코딩하지 않는다. 키가 `data-link="키"` 버튼과 매칭되고, 값이 비었거나 http(s)가 아니면 버튼이 숨겨진다. `fetch`로 읽으므로 `index.html`을 파일로 직접 열면 버튼이 안 보인다 — 반드시 `npm run dev`로 확인.
 - `ads/` — 광고 4장(1080×1080) 단독 HTML 원본 + `render.mjs`. **`site/images/`의 PNG는 여기서 생성된 산출물**이므로 광고를 고칠 땐 HTML을 수정하고 `npm run render`로 재생성한다. (01·04는 각각 Hero/섹션4 이미지와 슬라이드에 동시에 쓰임 — 매핑은 `render.mjs`의 `ads` 배열)
 - `design-source/` — Claude 디자인 캔버스 원본(`.dc.html`, `canvas.json`). 실행용이 아닌 참고 자료이며 수정하지 않는다.
 - `images/` — 원본 스톡/시안 이미지 보관용. 사이트에서 직접 참조하지 않음.

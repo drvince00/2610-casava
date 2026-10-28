@@ -1,5 +1,5 @@
 /* ===== 설정 (실제 정보로 교체) ===== */
-const KAKAO_URL = '#'; // 예: 'https://pf.kakao.com/_xxxxxx/chat'
+// 문의 링크(카카오톡 · 메신저)는 data/links.json 에서 읽는다
 
 // 판매처 목록. name/address/hours/mapUrl 은 실제 정보로 교체
 const STORES = [
@@ -23,7 +23,7 @@ const T = {
     b4t: '면역·부기 완화', b4: '비타민 C와 칼륨이 면역력을 높이고 나트륨을 배출합니다.',
     storeTitle: '세부 판매처', storeLead: '숙소 근처에서 Casava를 만나보세요.',
     hoursLabel: '영업시간', mapLabel: '지도 보기',
-    kakao: '카카오톡으로 문의하기',
+    kakao: '카카오톡으로 문의하기', messenger: '메신저로 문의하기',
     footerTag: '세부에서 온 바삭한 카사바칩', contactLabel: '연락처', addressLabel: '주소', inquiryLabel: '문의시간',
   },
   ja: {
@@ -38,7 +38,7 @@ const T = {
     b4t: '免疫・むくみケア', b4: 'ビタミンCとカリウムが免疫力を高め、ナトリウムの排出を助けます。',
     storeTitle: 'セブの販売店', storeLead: 'ホテルの近くでCasavaを見つけよう。',
     hoursLabel: '営業時間', mapLabel: '地図を見る',
-    kakao: 'カカオトークで問い合わせ',
+    kakao: 'カカオトークで問い合わせ', messenger: 'Messengerで問い合わせ',
     footerTag: 'セブ生まれのサクサクキャッサバチップス', contactLabel: '連絡先', addressLabel: '住所', inquiryLabel: 'お問い合わせ時間',
   },
   en: {
@@ -53,7 +53,7 @@ const T = {
     b4t: 'Immunity & less puffiness', b4: 'Vitamin C and potassium support immunity and help flush out sodium.',
     storeTitle: 'Where to buy in Cebu', storeLead: 'Find Casava near your hotel.',
     hoursLabel: 'Hours', mapLabel: 'Open map',
-    kakao: 'Chat with us on KakaoTalk',
+    kakao: 'Chat with us on KakaoTalk', messenger: 'Chat with us on Messenger',
     footerTag: 'Crunchy cassava chips from Cebu', contactLabel: 'Contact', addressLabel: 'Address', inquiryLabel: 'Inquiry hours',
   },
 };
@@ -126,7 +126,22 @@ function setupToTop() {
   onScroll();
 }
 
-document.getElementById('kakaoBtn').href = KAKAO_URL;
+// 문의 버튼: links.json 의 키와 data-link 가 같은 버튼에 링크를 넣고 보이게 한다. 값이 없으면 숨긴 채로 둔다
+async function setupLinks() {
+  try {
+    const res = await fetch('data/links.json', { cache: 'no-cache' });
+    const links = await res.json();
+    document.querySelectorAll('[data-link]').forEach((el) => {
+      const url = links[el.dataset.link];
+      if (typeof url === 'string' && /^https?:\/\//.test(url)) {
+        el.href = url;
+        el.hidden = false;
+      }
+    });
+  } catch (e) { /* 파일을 못 읽으면 버튼은 숨긴 채로 둔다 */ }
+}
+
+setupLinks();
 document.querySelectorAll('.lang-btn').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
 setupMarquee();
 setupToTop();
