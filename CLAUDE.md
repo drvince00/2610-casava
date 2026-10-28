@@ -17,6 +17,12 @@ npm run render    # ads/*.html → site/images/*.png 재생성 (Playwright Chrom
 
 `render`는 Google Fonts를 불러오므로 인터넷 연결이 필요하다.
 
+## 배포
+
+- GitHub `drvince00/2610-casava` (public) ↔ Cloudflare Pages Git 연동. **`main`에 push하면 자동 배포** (빌드 명령 없음, 출력 디렉터리 `site`).
+- 프로덕션: https://2610-casava.pages.dev — `<hash>.2610-casava.pages.dev`는 개별 배포 고정 URL이라 확인용으로 쓰지 말 것.
+- 공개 저장소이므로 라이선스 없는 이미지(Adobe Stock 미리보기 `images/1000_F_*` 등)는 커밋하지 않는다 (`.gitignore` 처리됨).
+
 ## 구조
 
 - `site/` — 배포 대상 그 자체 (빌드 산출물이 아니라 원본). 배포 시 이 폴더를 그대로 업로드.
