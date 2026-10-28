@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Casava landing page — mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+a{color:#1b1b1b}a:hover{color:#E63323}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 4600px; background: #FFF4D6">
+<dc-import name="Landing" font-set="{{fontSet}}" type-scale="{{typeScale}}" start-lang="{{startLang}}" hint-size="390px,4600px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"fontSet":{"editor":"enum","options":["A · Retro Pop","B · Friendly","C · Comic"],"default":"A · Retro Pop"},"typeScale":{"editor":"enum","options":["S","M","L"],"default":"M"},"startLang":{"editor":"enum","options":["ko","ja","en"],"default":"ko"},"$preview":{"width":390,"height":4600}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+fontSet: this.props.fontSet ?? 'A · Retro Pop',
+typeScale: this.props.typeScale ?? 'M',
+startLang: this.props.startLang ?? 'ko'
+};
+}
+}
+</script>
+</body>
+</html>

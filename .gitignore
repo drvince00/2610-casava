@@ -1,0 +1,7 @@
+node_modules/
+casava-handoff.zip
+.DS_Store
+Thumbs.db
+
+# Adobe Stock 미리보기(워터마크) 이미지 — 라이선스 없음, 저장소에 올리지 않음
+images/1000_F_*

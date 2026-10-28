@@ -1,0 +1,99 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Landing.dc.html": {
+      "expand": "fill",
+      "h": 4300,
+      "is_interactive": true,
+      "title": "Landing — Desktop",
+      "w": 1440,
+      "x": 0,
+      "y": 1560
+    },
+    "LandingMobile.dc.html": {
+      "h": 4600,
+      "is_interactive": true,
+      "title": "Landing — Mobile 390",
+      "w": 390,
+      "x": 1520,
+      "y": 1560
+    },
+    "Main.dc.html": {
+      "h": 1080,
+      "title": "01 Crunch Time",
+      "w": 1080,
+      "x": 0,
+      "y": 0
+    },
+    "MoveOverPotato.dc.html": {
+      "h": 1080,
+      "title": "02 Move Over, Potato",
+      "w": 1080,
+      "x": 1160,
+      "y": 0
+    },
+    "SnackAttack.dc.html": {
+      "h": 1080,
+      "title": "03 Snack Attack Comic",
+      "w": 1080,
+      "x": 2320,
+      "y": 0
+    },
+    "Tropics.dc.html": {
+      "h": 1080,
+      "title": "04 Born in the Tropics",
+      "w": 1080,
+      "x": 3480,
+      "y": 0
+    },
+    "TypeOptions.dc.html": {
+      "h": 1160,
+      "title": "Font & size options",
+      "w": 1440,
+      "x": 1990,
+      "y": 1560
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-27T06:30:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "noteOrder": [
+    "setTitle",
+    "landingTitle"
+  ],
+  "notes": {
+    "landingTitle": {
+      "kind": "title1",
+      "maxW": 3430,
+      "text": "Casava Landing Page — Cebu tourists",
+      "w": 240,
+      "x": 0,
+      "y": 1260
+    },
+    "setTitle": {
+      "kind": "title1",
+      "maxW": 4560,
+      "text": "Cassava Chips — Retro Cartoon Snack Ads",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "MoveOverPotato.dc.html",
+    "SnackAttack.dc.html",
+    "Tropics.dc.html",
+    "Landing.dc.html",
+    "LandingMobile.dc.html",
+    "TypeOptions.dc.html"
+  ],
+  "pages": [],
+  "title": "Cassava Chips Cartoon Ads"
+}
