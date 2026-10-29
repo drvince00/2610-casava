@@ -115,7 +115,8 @@ casava-handoff/
 - [x] 슬라이드 실제 이미지 교체 (2026-10-29, 9장 랜덤 순서)
 - [x] 브랜드 철자 확정: `Cassava` (2026-10-29)
 - [ ] 푸터 로고를 `CASSAVA CHIP` 으로 맞출지 결정 (현재 `Cassava`)
-- [ ] 파비콘, OG 이미지(공유 썸네일), `<title>`/description 언어별 대응
+- [x] 파비콘 (2026-10-29, 광고 02 선글라스 카사바칩 얼굴: `favicon.svg` · `favicon.ico` · `apple-touch-icon.png`)
+- [ ] OG 이미지(공유 썸네일), `<title>`/description 언어별 대응
 - [ ] 배포 (예: Cloudflare Pages — 빌드 없이 `site/` 폴더 그대로 업로드 가능)
 
 ## 8. ⚠️ 주의: 효능 문구
