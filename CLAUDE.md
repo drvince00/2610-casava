@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트
 
-세부(필리핀) 관광객(한·일·영)을 대상으로 한 카사바칩 `CASAVA CHIP` 한 장짜리 랜딩페이지. **빌드 없는 정적 사이트**(HTML/CSS/vanilla JS). 테스트·린트 도구는 없음.
+세부(필리핀) 관광객(한·일·영)을 대상으로 한 카사바칩 `CASSAVA CHIP` 한 장짜리 랜딩페이지. **빌드 없는 정적 사이트**(HTML/CSS/vanilla JS). 테스트·린트 도구는 없음.
 
 요구사항, 확정된 결정 사항, 디자인 토큰, 남은 TODO는 모두 [PRD.md](PRD.md)에 있으니 작업 전에 먼저 읽을 것. 결정 사항이 바뀌면 PRD.md의 "3. 확정된 결정 사항" / "7. 남은 일"도 함께 갱신한다.
 

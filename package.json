@@ -2,7 +2,7 @@
   "name": "casava-chip-landing",
   "version": "0.1.0",
   "private": true,
-  "description": "CASAVA CHIP 랜딩페이지 (정적 사이트, 빌드 없음)",
+  "description": "CASSAVA CHIP 랜딩페이지 (정적 사이트, 빌드 없음)",
   "type": "module",
   "scripts": {
     "dev": "serve site -l 3000",
