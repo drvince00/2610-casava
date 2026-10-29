@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm run dev       # serve site -l 3000  → http://localhost:3000
-npm run render    # ads/*.html → PNG 재생성 (01·04 → site/images, 02·03 → images/slides-src). Playwright Chromium 필요
+npm run render    # ads/*.html → PNG 재생성 (01·04 → site/images, 02·03 → images/slides-src, og → site/og.png). 일부만: npm run render -- og 02. Playwright Chromium 필요
 npm run slides    # images/slides-src → site/images/slides/*.webp (800px 정사각 크롭) + site/data/slides.json. Python Pillow 필요
 ```
 

@@ -116,7 +116,7 @@ casava-handoff/
 - [x] 브랜드 철자 확정: `Cassava` (2026-10-29)
 - [ ] 푸터 로고를 `CASSAVA CHIP` 으로 맞출지 결정 (현재 `Cassava`)
 - [x] 파비콘 (2026-10-29, 광고 02 선글라스 카사바칩 얼굴: `favicon.svg` · `favicon.ico` · `apple-touch-icon.png`)
-- [ ] OG 이미지(공유 썸네일), `<title>`/description 언어별 대응
+- [x] OG 이미지(공유 썸네일) · title · description (2026-10-29) — **영어로 통일** (언어별 대응 안 함). 이미지 원본 `ads/og.html` → `npm run render -- og` → `site/og.png`. ⚠️ 도메인을 바꾸면 index.html 의 `og:url` · `og:image` · `canonical` 절대주소도 함께 바꿀 것
 - [ ] 배포 (예: Cloudflare Pages — 빌드 없이 `site/` 폴더 그대로 업로드 가능)
 
 ## 8. ⚠️ 주의: 효능 문구

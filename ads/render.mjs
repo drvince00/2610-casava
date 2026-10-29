@@ -18,16 +18,25 @@ const ads = [
   { file: '02-move-over-potato.html', outs: [join(slideSrcDir, '02-move-over-potato.png')] },
   { file: '03-snack-attack.html', outs: [join(slideSrcDir, '03-snack-attack.png')] },
   { file: '04-born-in-the-tropics.html', outs: [join(imgDir, '04-born-in-the-tropics.png')] },
+  // 링크 공유 썸네일 (og:image)
+  { file: 'og.html', outs: [join(here, '..', 'site', 'og.png')], width: 1200, height: 630 },
 ];
 
+// 인자로 일부만 렌더링 가능: npm run render -- og 02
+const only = process.argv.slice(2);
+const targets = only.length ? ads.filter((ad) => only.some((key) => ad.file.startsWith(key))) : ads;
+
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1080, height: 1080 }, deviceScaleFactor: 1 });
-for (const ad of ads) {
+for (const ad of targets) {
+  const width = ad.width ?? 1080;
+  const height = ad.height ?? 1080;
+  const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
   await page.goto(pathToFileURL(join(here, ad.file)).href, { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
   for (const out of ad.outs) {
-    await page.screenshot({ path: out, clip: { x: 0, y: 0, width: 1080, height: 1080 } });
+    await page.screenshot({ path: out, clip: { x: 0, y: 0, width, height } });
     console.log('saved', out);
   }
+  await page.close();
 }
 await browser.close();
