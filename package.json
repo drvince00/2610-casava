@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "serve site -l 3000",
-    "render": "node ads/render.mjs"
+    "render": "node ads/render.mjs",
+    "slides": "python scripts/build-slides.py"
   },
   "devDependencies": {
     "playwright": "^1.64.1",

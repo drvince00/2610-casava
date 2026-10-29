@@ -12,7 +12,7 @@ casava-handoff/
 │  ├─ index.html
 │  ├─ css/style.css      ← 색·폰트·크기 토큰 전부 여기 :root 에 있음
 │  ├─ js/main.js         ← 다국어 문구, 판매처 목록, 카카오 링크 설정
-│  └─ images/            ← 01·04 고정 이미지 + slides/ 슬라이드 4장 (지금은 광고 시안으로 채워 둠)
+│  └─ images/            ← 01·04 고정 이미지 + slides/ 슬라이드 WebP (npm run slides 산출물)
 ├─ ads/                  ← 광고 4장 원본 (1080×1080, 단독 HTML) + render.mjs (PNG 재생성)
 └─ design-source/        ← 디자인 캔버스 원본 (.dc.html, canvas.json) — 참고용, 실행 X
 ```
@@ -33,7 +33,7 @@ casava-handoff/
 |---|---|---|
 | 공통 | 헤더 (sticky) | 좌측 상단 `CASSAVA CHIP` = 홈(맨 위로) / 우측 상단 국기 3개 = 언어 토글 (🇰🇷 한국어 · 🇯🇵 일본어 · 🇺🇸 영어) |
 | 1 | Hero | `images/01-crunch-time.png` 고정 이미지 (최대 760px, 굵은 테두리 + 그림자) |
-| 2 | 슬라이드 + 카사바 설명 | 제목/리드 문구 → 이미지가 **우→좌로 끊김 없이 천천히 흐름** (36초 1바퀴, 마우스 올리면 일시정지) → 카사바 설명 카드: 소개 1줄 + "주요 효능" 카드 4장 |
+| 2 | 슬라이드 + 카사바 설명 | 제목/리드 문구 → 이미지가 **우→좌로 끊김 없이 천천히 흐름** (장당 9초 속도, 페이지 열 때마다 순서 랜덤, 마우스 올리면 일시정지) → 카사바 설명 카드: 소개 1줄 + "주요 효능" 카드 4장 |
 | 3 | 판매처 | 판매처 카드 그리드 (지역 태그 · 매장명 · 주소 · 영업시간 · 지도 링크) + **카카오톡 · 메신저 아이콘 버튼 2개** + 그 아래 공통 문구 "문의 및 견적" 하나 |
 | 4 | Tropics | `images/04-born-in-the-tropics.png` 고정 이미지 |
 | 공통 | Footer | 로고, 연락처(전화 · 이메일), 주소, **문의시간**, 저작권 |
@@ -98,9 +98,9 @@ casava-handoff/
 |---|---|---|
 | `images/01-crunch-time.png` | Hero | 1080×1080 |
 | `images/04-born-in-the-tropics.png` | 섹션 4 | 1080×1080 |
-| `images/slides/slide-01~04.png` | 슬라이드 | **임시로 광고 4장을 넣어 둠 → 실제 사진/이미지로 교체 예정** |
+| `images/slides/*.webp` | 슬라이드 | 원본은 `images/slides-src/` (무료 사진 7장 + 광고 02·03). `npm run slides` 로 800px 정사각 WebP + `data/slides.json` 생성 |
 
-- 슬라이드 이미지는 정사각형 권장 (CSS에서 `object-fit: cover` 로 280px / 768px 이상 400px 정사각 표시). 장수를 늘리려면 `index.html` 의 `.marquee-track` 안에 `<img class="slide">` 만 추가 (JS가 자동 복제해 무한 루프).
+- 슬라이드는 가운데 기준 정사각 크롭 (CSS `object-fit: cover` 로 280px / 768px 이상 400px 표시). 추가·교체는 `images/slides-src/` 에 파일을 넣거나 빼고 `npm run slides`.
 - 광고를 고친 뒤 PNG 재생성: `npm i -D playwright && npx playwright install chromium && node ads/render.mjs`
 - 배포 전 WebP 변환 + `srcset` (540/1080) 권장 — 현재 PNG 1장당 약 220~280KB.
 
@@ -112,7 +112,7 @@ casava-handoff/
   - 지역 태그 Mactan / Cebu City / Moalboal 는 예시. 실제 지역으로 교체
 - [ ] 푸터: `[PHONE]` `[EMAIL]` `[ADDRESS]` `[HOURS]`(문의시간) 교체
 - [ ] 04 광고 안의 `AVAILABLE AT [YOUR STORE]` 문구 확정 후 `ads/04-born-in-the-tropics.html` 수정 → PNG 재생성
-- [ ] 슬라이드 실제 이미지 교체
+- [x] 슬라이드 실제 이미지 교체 (2026-10-29, 9장 랜덤 순서)
 - [x] 브랜드 철자 확정: `Cassava` (2026-10-29)
 - [ ] 푸터 로고를 `CASSAVA CHIP` 으로 맞출지 결정 (현재 `Cassava`)
 - [ ] 파비콘, OG 이미지(공유 썸네일), `<title>`/description 언어별 대응

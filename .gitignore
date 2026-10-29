@@ -5,3 +5,8 @@ Thumbs.db
 
 # Adobe Stock 미리보기(워터마크) 이미지 — 라이선스 없음, 저장소에 올리지 않음
 images/1000_F_*
+
+# 슬라이드 원본 사진(Unsplash · Pexels · Pixabay)은 공개 저장소에 재배포하지 않음 — 로컬에만 보관. 직접 만든 광고 02·03만 커밋
+images/slides-src/*
+!images/slides-src/02-move-over-potato.png
+!images/slides-src/03-snack-attack.png
