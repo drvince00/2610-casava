@@ -108,9 +108,9 @@ casava-handoff/
 
 - [x] **카카오톡 채널 URL** → `site/data/links.json` 의 `kakao` (2026-10-28 연결 — 채팅방 직행 대신 채널 홈으로 링크)
 - [x] **페이스북 메신저 URL** → `site/data/links.json` 의 `messenger` (2026-10-28 연결, 페이지 ID `61568543280425`)
-- [ ] **판매처 실제 정보** (매장명 · 주소 · 영업시간 · 구글맵 링크) → `main.js` 의 `STORES`
-  - 지역 태그 Mactan / Cebu City / Moalboal 는 예시. 실제 지역으로 교체
-- [ ] 푸터: `[PHONE]` `[EMAIL]` `[ADDRESS]` `[HOURS]`(문의시간) 교체
+- [x] **판매처 · 푸터 연락처를 구글시트로 연결** (2026-10-30) — 시트 "CASSAVA CHIP 사이트 정보"의 Stores · Contact 탭 (웹에 게시된 CSV). 고객은 시트만 고치면 몇 분 뒤 반영. 사이트에는 사본(`data/*.csv`)을 두고 먼저 그림 → `npm run sheet` 로 가끔 갱신
+- [ ] 시트에 실제 판매처 · 연락처 입력 (현재 테스트 데이터: Monkey Tree 2줄, 테스트 전화·메일). 주소는 영어 표기로 (구글맵 언어를 English 로)
+- [ ] 시트 제목 줄 보호 + 고객 구글 계정에 편집자로 공유
 - [ ] 04 광고 안의 `AVAILABLE AT [YOUR STORE]` 문구 확정 후 `ads/04-born-in-the-tropics.html` 수정 → PNG 재생성
 - [x] 슬라이드 실제 이미지 교체 (2026-10-29, 9장 랜덤 순서)
 - [x] 브랜드 철자 확정: `Cassava` (2026-10-29)

@@ -134,16 +134,17 @@
       <div class="footer-logo">Cassava</div>
       <div data-i18n="footerTag"></div>
     </div>
+    <!-- 연락처 · 주소 · 문의시간은 구글시트 Contact 탭에서 채운다 (js/main.js renderContact) -->
     <div>
-      <div class="footer-label" data-i18n="contactLabel"></div>
-      <div>[PHONE]</div>
-      <div>[EMAIL]</div>
+      <div class="footer-label" data-i18n="contactLabel" data-contact-label="phone email"></div>
+      <div><a class="footer-link" data-contact="phone" hidden></a></div>
+      <div><a class="footer-link" data-contact="email" hidden></a></div>
     </div>
     <div>
-      <div class="footer-label" data-i18n="addressLabel"></div>
-      <div>[ADDRESS], Cebu, Philippines</div>
-      <div class="footer-label spaced" data-i18n="inquiryLabel"></div>
-      <div>[HOURS]</div>
+      <div class="footer-label" data-i18n="addressLabel" data-contact-label="address"></div>
+      <div data-contact="address" hidden></div>
+      <div class="footer-label spaced" data-i18n="inquiryLabel" data-contact-label="inquiry"></div>
+      <div data-contact="inquiry" hidden></div>
     </div>
   </div>
   <div class="container copyright">© 2026 Cassava. All rights reserved.</div>

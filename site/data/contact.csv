@@ -1,0 +1,7 @@
+field,항목,value
+phone,전화번호,09231234567
+email,이메일,testmail@gmail.net
+address,주소 (영어),Cebu Mactan
+inquiryOpen,문의 시작 시간,10:00
+inquiryClose,문의 종료 시간,18:00
+inquiryClosed,문의 쉬는 날,None
