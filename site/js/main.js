@@ -197,7 +197,8 @@ async function setupSheet() {
       const res = await fetch(sources[name]);
       if (!res.ok) return;
       const text = await res.text();
-      if (text.trim() === (local[name] || '').trim()) return;
+      const same = (a) => a.replace(/\r\n/g, '\n').trim();
+      if (same(text) === same(local[name] || '')) return;
       const records = toRecords(text, SHEET_HEADERS[name]);
       if (!records) return; // 제목 줄이 깨진 시트는 무시
       applySheet(name, records);
