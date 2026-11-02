@@ -28,6 +28,7 @@ npm run sheet     # 구글시트(웹에 게시된 CSV) → site/data/stores.csv 
 ## 구조
 
 - `site/` — 배포 대상 그 자체 (빌드 산출물이 아니라 원본). 배포 시 이 폴더를 그대로 업로드.
+  - `404.html` — 없는 주소용 페이지 (Cloudflare Pages가 404 상태로 보여줌). 어떤 깊이의 주소에서도 열리므로 안의 경로는 모두 `/`로 시작해야 한다. 이 파일이 있으면 Pages가 없는 주소를 `index.html`로 돌려보내지 않으므로, 배포 확인 스크립트는 상태 코드나 content-type으로 판단할 것.
   - `css/style.css` — 색·폰트·글자 크기 토큰이 전부 `:root`에 있음. 폰트 세트와 크기는 `<html data-font-set="pop|friendly|comic">`, `<html data-scale="s|m|l">` 속성으로 전환. 일본어는 `html[lang="ja"]` 셀렉터가 폰트 스택을 바꿈.
   - `js/main.js` — 시트 제목 줄 정의(`SHEET_HEADERS`)와 다국어 문구 `T = { ko, ja, en }`가 맨 위에 있음.
   - `data/sheet.json`, `data/stores.csv`, `data/contact.csv` — 판매처 · 푸터 연락처는 **구글시트 "CASSAVA CHIP 사이트 정보"**(개발자 drvince00 소유, 고객이 편집)의 Stores · Contact 탭에서 온다. `sheet.json`은 게시된 CSV 주소, `*.csv`는 `npm run sheet`로 받은 사본. 페이지는 사본으로 즉시 그린 뒤 게시된 시트를 읽어 내용이 다르면 다시 그린다 (구글 응답 ~2초, 장애 시 사본 유지, 필수 제목 줄이 없으면 무시). 시트 입력은 영어만 — 휴무일 · 시간 문구는 `T.days` / `T.closedTpl`로 언어별 생성.
