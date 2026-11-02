@@ -227,19 +227,22 @@ function setLang(lang) {
 // 슬라이드: data/slides.json 목록을 섞어서 채우고, 무한 루프를 위해 한 번 복제 (CSS가 -50% 까지 이동)
 async function setupMarquee() {
   const track = document.querySelector('.marquee-track');
-  let srcs = [];
+  let names = [];
   try {
-    srcs = await (await fetch('data/slides.json', { cache: 'no-cache' })).json();
+    names = await (await fetch('data/slides.json', { cache: 'no-cache' })).json();
   } catch (e) { return; }
-  for (let i = srcs.length - 1; i > 0; i--) {
+  for (let i = names.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [srcs[i], srcs[j]] = [srcs[j], srcs[i]];
+    [names[i], names[j]] = [names[j], names[i]];
   }
   for (const pass of [0, 1]) {
-    for (const src of srcs) {
+    for (const name of names) {
+      // scripts/build-images.py 가 만든 400 · 800px 중 화면에 맞는 것을 고른다 (표시 크기 280px / 768px 이상 400px)
       const img = document.createElement('img');
       img.className = 'slide';
-      img.src = src;
+      img.src = `images/slides/${name}-800.webp`;
+      img.srcset = `images/slides/${name}-400.webp 400w, images/slides/${name}-800.webp 800w`;
+      img.sizes = '(min-width: 768px) 400px, 280px';
       img.width = 800;
       img.height = 800;
       img.alt = '';
@@ -248,7 +251,7 @@ async function setupMarquee() {
       track.appendChild(img);
     }
   }
-  track.style.setProperty('--slides', srcs.length); // 장수가 늘어도 흐르는 속도는 일정하게
+  track.style.setProperty('--slides', names.length); // 장수가 늘어도 흐르는 속도는 일정하게
 }
 
 // TOP 버튼: 한 화면 이상 내려가면 표시

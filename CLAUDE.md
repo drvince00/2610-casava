@@ -12,8 +12,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm run dev       # serve site -l 3000  → http://localhost:3000
-npm run render    # ads/*.html → PNG 재생성 (01·04 → site/images, 02·03 → images/slides-src, og → site/og.png). 일부만: npm run render -- og 02. Playwright Chromium 필요
-npm run slides    # images/slides-src → site/images/slides/*.webp (800px 정사각 크롭) + site/data/slides.json. Python Pillow 필요
+npm run render    # ads/*.html → PNG 원본 재생성 (01·04 → images/ads-src, 02·03 → images/slides-src, og → site/og.png). 일부만: npm run render -- og 02. Playwright Chromium 필요
+npm run images    # 원본 → 사이트용 WebP: images/ads-src → site/images/*-540·1080.webp, images/slides-src → site/images/slides/*-400·800.webp (정사각 크롭) + site/data/slides.json. Python Pillow 필요
 npm run sheet     # 구글시트(웹에 게시된 CSV) → site/data/stores.csv · contact.csv 사본 갱신. 제목 줄이 깨졌으면 저장 안 함
 ```
 
@@ -32,10 +32,10 @@ npm run sheet     # 구글시트(웹에 게시된 CSV) → site/data/stores.csv 
   - `js/main.js` — 시트 제목 줄 정의(`SHEET_HEADERS`)와 다국어 문구 `T = { ko, ja, en }`가 맨 위에 있음.
   - `data/sheet.json`, `data/stores.csv`, `data/contact.csv` — 판매처 · 푸터 연락처는 **구글시트 "CASSAVA CHIP 사이트 정보"**(개발자 drvince00 소유, 고객이 편집)의 Stores · Contact 탭에서 온다. `sheet.json`은 게시된 CSV 주소, `*.csv`는 `npm run sheet`로 받은 사본. 페이지는 사본으로 즉시 그린 뒤 게시된 시트를 읽어 내용이 다르면 다시 그린다 (구글 응답 ~2초, 장애 시 사본 유지, 필수 제목 줄이 없으면 무시). 시트 입력은 영어만 — 휴무일 · 시간 문구는 `T.days` / `T.closedTpl`로 언어별 생성.
   - `data/links.json` — 문의 링크(카카오톡 · 메신저). 소스에 하드코딩하지 않는다. 키가 `data-link="키"` 버튼과 매칭되고, 값이 비었거나 http(s)가 아니면 버튼이 숨겨진다. `fetch`로 읽으므로 `index.html`을 파일로 직접 열면 버튼이 안 보인다 — 반드시 `npm run dev`로 확인.
-  - `images/slides/*.webp`, `data/slides.json` — **`npm run slides`의 산출물. 직접 고치지 말 것.**
-- `ads/` — 광고 4장(1080×1080) 단독 HTML 원본 + `render.mjs`. **광고 PNG는 여기서 생성된 산출물**이므로 광고를 고칠 땐 HTML을 수정하고 `npm run render`로 재생성한다 (02·03을 고쳤으면 이어서 `npm run slides`). 매핑은 `render.mjs`의 `ads` 배열.
+  - `images/*.webp`, `images/slides/*.webp`, `data/slides.json` — **`npm run images`의 산출물. 직접 고치지 말 것.** 페이지는 `srcset`으로 화면 크기에 맞는 파일을 고른다. `og.png` · `apple-touch-icon.png`은 카톡 · 페이스북 · iOS 호환을 위해 PNG 유지.
+- `ads/` — 광고 4장(1080×1080) 단독 HTML 원본 + `render.mjs`. **광고 PNG는 여기서 생성된 산출물**이므로 광고를 고칠 땐 HTML을 수정하고 `npm run render`로 재생성한다 (이어서 `npm run images`). 매핑은 `render.mjs`의 `ads` 배열.
 - `design-source/` — Claude 디자인 캔버스 원본(`.dc.html`, `canvas.json`). 실행용이 아닌 참고 자료이며 수정하지 않는다.
-- `images/` — 배포되지 않는 원본 보관용. `images/slides-src/`는 슬라이드 원본(무료 상업 이용 사진: Unsplash · Pexels · Pixabay + 광고 02·03). 슬라이드 추가/교체는 여기에 파일을 넣거나 빼고 `npm run slides`.
+- `images/` — 배포되지 않는 원본 보관용. `images/ads-src/`는 광고 01·04 PNG 원본, `images/slides-src/`는 슬라이드 원본(무료 상업 이용 사진: Unsplash · Pexels · Pixabay + 광고 02·03). 슬라이드 추가/교체는 여기에 파일을 넣거나 빼고 `npm run images`.
 
 ## 다국어 동작 (main.js)
 
@@ -51,4 +51,4 @@ npm run sheet     # 구글시트(웹에 게시된 CSV) → site/data/stores.csv 
 - 카카오톡 버튼은 아이콘만 표시, 문구는 aria-label에만.
 - 카사바 설명 영역과 슬라이드 리드 문구는 굵은 고딕(Noto Sans KR/JP 700·900).
 - 스타일: 레트로 미국 스낵 광고/만화풍 — 굵은 검정 테두리 + 오프셋 그림자 + 둥근 모서리.
-- 효능 문구는 광고 규제(필리핀 FDA·식약처) 소지가 있어 배포 전 재검토 대상 (PRD.md 8절).
+- 효능 문구는 광고 규제(필리핀 FDA·식약처) 소지가 있지만 **고객 결정으로 현재 문구 유지**. 문제가 생기면 원재료 소개 톤으로 바꾼다 (PRD.md 8절).

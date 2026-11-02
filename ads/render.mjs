@@ -1,6 +1,6 @@
 // 광고 4장을 1080×1080 PNG로 렌더링한다.
-// 01·04 는 site/images (Hero · 섹션4), 02·03 은 슬라이드 원본 폴더 images/slides-src 로 간다.
-// 02·03 을 고쳤으면 이어서 npm run slides 로 슬라이드용 WebP 를 다시 만든다.
+// 01·04 는 images/ads-src (Hero · 섹션4 원본), 02·03 은 슬라이드 원본 폴더 images/slides-src 로 간다.
+// 렌더링 후 npm run images 로 사이트용 WebP 를 다시 만든다. og 는 site/og.png 로 바로 간다.
 // 사용: npm run render   (Playwright Chromium 필요: npx playwright install chromium)
 // Google Fonts를 불러오므로 인터넷 연결이 필요하다.
 import { chromium } from 'playwright';
@@ -9,7 +9,7 @@ import { dirname, join } from 'node:path';
 import { mkdirSync } from 'node:fs';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const imgDir = join(here, '..', 'site', 'images');
+const imgDir = join(here, '..', 'images', 'ads-src');
 const slideSrcDir = join(here, '..', 'images', 'slides-src');
 mkdirSync(slideSrcDir, { recursive: true });
 

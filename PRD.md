@@ -12,7 +12,7 @@ casava-handoff/
 │  ├─ index.html
 │  ├─ css/style.css      ← 색·폰트·크기 토큰 전부 여기 :root 에 있음
 │  ├─ js/main.js         ← 다국어 문구, 판매처 목록, 카카오 링크 설정
-│  └─ images/            ← 01·04 고정 이미지 + slides/ 슬라이드 WebP (npm run slides 산출물)
+│  └─ images/            ← 01·04 고정 이미지 + slides/ 슬라이드 (모두 WebP, npm run images 산출물)
 ├─ ads/                  ← 광고 4장 원본 (1080×1080, 단독 HTML) + render.mjs (PNG 재생성)
 └─ design-source/        ← 디자인 캔버스 원본 (.dc.html, canvas.json) — 참고용, 실행 X
 ```
@@ -32,10 +32,10 @@ casava-handoff/
 | # | 구간 | 내용 |
 |---|---|---|
 | 공통 | 헤더 (sticky) | 좌측 상단 `CASSAVA CHIP` = 홈(맨 위로) / 우측 상단 국기 3개 = 언어 토글 (🇰🇷 한국어 · 🇯🇵 일본어 · 🇺🇸 영어) |
-| 1 | Hero | `images/01-crunch-time.png` 고정 이미지 (최대 760px, 굵은 테두리 + 그림자) |
+| 1 | Hero | `images/01-crunch-time-*.webp` 고정 이미지 (최대 760px, 굵은 테두리 + 그림자) |
 | 2 | 슬라이드 + 카사바 설명 | 제목/리드 문구 → 이미지가 **우→좌로 끊김 없이 천천히 흐름** (장당 9초 속도, 페이지 열 때마다 순서 랜덤, 마우스 올리면 일시정지) → 카사바 설명 카드: 소개 1줄 + "주요 효능" 카드 4장 |
 | 3 | 판매처 | 판매처 카드 그리드 (지역 태그 · 매장명 · 주소 · 영업시간 · 지도 링크) + **카카오톡 · 메신저 아이콘 버튼 2개** + 그 아래 공통 문구 "문의 및 견적" 하나 |
-| 4 | Tropics | `images/04-born-in-the-tropics.png` 고정 이미지 |
+| 4 | Tropics | `images/04-born-in-the-tropics-*.webp` 고정 이미지 |
 | 공통 | Footer | 로고, 연락처(전화 · 이메일), 주소, **문의시간**, 저작권 |
 | 공통 | 플로팅 | 우측 하단 빨간 원형 `TOP` 버튼 (스크롤 60% 이상 내려가면 나타남) |
 
@@ -96,30 +96,34 @@ casava-handoff/
 
 | 파일 | 위치 | 비고 |
 |---|---|---|
-| `images/01-crunch-time.png` | Hero | 1080×1080 |
-| `images/04-born-in-the-tropics.png` | 섹션 4 | 1080×1080 |
-| `images/slides/*.webp` | 슬라이드 | 원본은 `images/slides-src/` (무료 사진 7장 + 광고 02·03). `npm run slides` 로 800px 정사각 WebP + `data/slides.json` 생성 |
+| `images/01-crunch-time-540·1080.webp` | Hero | 원본 `images/ads-src/01-crunch-time.png` (1080×1080) |
+| `images/04-born-in-the-tropics-540·1080.webp` | 섹션 4 | 원본 `images/ads-src/04-born-in-the-tropics.png` (1080×1080) |
+| `images/slides/*.webp` | 슬라이드 | 원본은 `images/slides-src/` (무료 사진 7장 + 광고 02·03). `npm run images` 로 400·800px 정사각 WebP + `data/slides.json` 생성 |
 
-- 슬라이드는 가운데 기준 정사각 크롭 (CSS `object-fit: cover` 로 280px / 768px 이상 400px 표시). 추가·교체는 `images/slides-src/` 에 파일을 넣거나 빼고 `npm run slides`.
-- 광고를 고친 뒤 PNG 재생성: `npm i -D playwright && npx playwright install chromium && node ads/render.mjs`
-- 배포 전 WebP 변환 + `srcset` (540/1080) 권장 — 현재 PNG 1장당 약 220~280KB.
+- 슬라이드는 가운데 기준 정사각 크롭 (CSS `object-fit: cover` 로 280px / 768px 이상 400px 표시). 추가·교체는 `images/slides-src/` 에 파일을 넣거나 빼고 `npm run images`.
+- 광고를 고친 뒤: `npm run render` (PNG 원본) → `npm run images` (사이트용 WebP). Playwright Chromium 필요: `npx playwright install chromium`
+- (2026-11-02) WebP + `srcset` 적용: 히어로 · 04 는 PNG 240KB → 모바일 34KB / PC 74KB, 슬라이드는 모바일용 400px 추가.
 
 ## 7. 남은 일 (TODO)
 
 - [x] **카카오톡 채널 URL** → `site/data/links.json` 의 `kakao` (2026-10-28 연결 — 채팅방 직행 대신 채널 홈으로 링크)
 - [x] **페이스북 메신저 URL** → `site/data/links.json` 의 `messenger` (2026-10-28 연결, 페이지 ID `61568543280425`)
 - [x] **판매처 · 푸터 연락처를 구글시트로 연결** (2026-10-30) — 시트 "CASSAVA CHIP 사이트 정보"의 Stores · Contact 탭 (웹에 게시된 CSV). 고객은 시트만 고치면 몇 분 뒤 반영. 사이트에는 사본(`data/*.csv`)을 두고 먼저 그림 → `npm run sheet` 로 가끔 갱신
-- [ ] 시트에 실제 판매처 · 연락처 입력 (현재 테스트 데이터: Monkey Tree 2줄, 테스트 전화·메일). 주소는 영어 표기로 (구글맵 언어를 English 로)
+- [ ] 시트에 실제 판매처 · 연락처 입력 — **고객이 직접 입력** (현재 테스트 데이터: Monkey Tree 2줄, 테스트 전화·메일). 주소는 영어 표기로. 입력 후 `npm run sheet` 로 사본 갱신 (급하지 않음)
 - [ ] 시트 제목 줄 보호 + 고객 구글 계정에 편집자로 공유
-- [ ] 04 광고 안의 `AVAILABLE AT [YOUR STORE]` 문구 확정 후 `ads/04-born-in-the-tropics.html` 수정 → PNG 재생성
+- [ ] 04 광고 안의 `AVAILABLE AT [YOUR STORE]` 문구 확정 후 `ads/04-born-in-the-tropics.html` 수정 → `npm run render -- 04` → `npm run images`
 - [x] 슬라이드 실제 이미지 교체 (2026-10-29, 9장 랜덤 순서)
 - [x] 브랜드 철자 확정: `Cassava` (2026-10-29)
 - [ ] 푸터 로고를 `CASSAVA CHIP` 으로 맞출지 결정 (현재 `Cassava`)
 - [x] 파비콘 (2026-10-29, 광고 02 선글라스 카사바칩 얼굴: `favicon.svg` · `favicon.ico` · `apple-touch-icon.png`)
 - [x] OG 이미지(공유 썸네일) · title · description (2026-10-29) — **영어로 통일** (언어별 대응 안 함). 이미지 원본 `ads/og.html` → `npm run render -- og` → `site/og.png`. ⚠️ 도메인을 바꾸면 index.html 의 `og:url` · `og:image` · `canonical` 절대주소도 함께 바꿀 것
-- [ ] 배포 (예: Cloudflare Pages — 빌드 없이 `site/` 폴더 그대로 업로드 가능)
+- [x] 배포: Cloudflare Pages ↔ GitHub 연동, https://2610-casava.pages.dev (2026-10-28)
+- [x] Cloudflare Web Analytics 켬 (2026-11-02)
+- [ ] 도메인 구입 · 연결 (고객 명의 Cloudflare 계정, 구글 문서 "도메인관리" 참고) → 이후 검색엔진 등록(구글 서치콘솔 · 네이버 서치어드바이저), robots.txt · sitemap.xml
 
 ## 8. ⚠️ 주의: 효능 문구
+
+> **결정 (2026-11-02):** 현재 문구를 그대로 유지한다. 규제나 민원 등 문제가 생기면 그때 아래 대안 톤으로 바꾼다.
 
 현재 효능 문구(혈당 관리, 변비 예방, 면역력 향상 등)는 **사용자 요청대로 그대로 반영**했지만, 다음 이유로 배포 전에 재검토를 권장합니다.
 
