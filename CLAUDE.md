@@ -43,7 +43,7 @@ npm run sheet     # 구글시트(웹에 게시된 CSV) → site/data/stores.csv 
 - 정적 문구는 HTML의 `data-i18n="키"`(textContent) / `data-i18n-aria="키"`(aria-label + title)로 `T`에 연결된다. 문구를 추가하면 **ko·ja·en 세 언어 모두**에 키를 넣을 것.
 - 판매처 카드와 푸터 연락처는 HTML에 없고 `renderStores()` / `renderContact()`가 시트 데이터로 언어 전환 시마다 다시 그린다. 시트는 외부 입력이므로 **textContent로만 넣는다** (innerHTML에 데이터 넣지 말 것). 지도 · 전화 · 메일 링크도 형식을 확인한 뒤에만 href에 넣는다.
 - 언어 결정: localStorage `casava-lang` → 브라우저 언어 → `en`. `setLang()`이 `<html lang>`도 바꿔서 폰트가 따라 바뀐다.
-- 슬라이드: `setupMarquee()`가 `data/slides.json`을 읽어 **페이지를 열 때마다 순서를 섞고**, 같은 목록을 한 번 더 붙여(aria-hidden) CSS 애니메이션이 -50%까지 이동하는 무한 루프를 만든다. 애니메이션 시간은 `--slides`(장수) × 9초라 장수가 바뀌어도 속도는 일정.
+- 슬라이드: `setupMarquee()`가 `data/slides.json`을 읽어 **페이지를 열 때마다 순서를 섞고**, 같은 목록을 한 번 더 붙여(aria-hidden) 무한 루프를 만든다. 움직임은 CSS 애니메이션이 아니라 `runMarquee()`가 requestAnimationFrame으로 transform을 준다 (장당 9초, 움직임 줄이기 설정이면 30초). 마우스는 올리면 멈춤/벗어나면 다시, 터치는 탭으로 멈춤/다시 + 화면 밖으로 스크롤되면 다시. 좌우 화살표(`.marquee-nav`)는 한 장씩 부드럽게 이동하고 멈춤 상태는 유지.
 
 ## 지켜야 할 결정 사항
 

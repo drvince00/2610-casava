@@ -13,6 +13,7 @@ const T = {
   ko: {
     slideTitle: '세부 여행의 바삭한 쉼표',
     slideLead: '해변에서 즐기는 바삭한 카사바칩.',
+    slidePrev: '이전 사진', slideNext: '다음 사진',
     aboutTitle: '카사바가 뭐예요?',
     aboutIntro: '카사바는 남미 원산의 탄수화물 풍부한 구근작물로, 가뭄에 강한 구황식물이자 타피오카 펄의 원료입니다.',
     benefitsTitle: '주요 효능',
@@ -30,6 +31,7 @@ const T = {
   ja: {
     slideTitle: 'セブ旅行のサクサクおやつ',
     slideLead: 'ビーチで楽しむ、サクサクのキャッサバチップス。',
+    slidePrev: '前の写真', slideNext: '次の写真',
     aboutTitle: 'キャッサバってなに？',
     aboutIntro: 'キャッサバは南米原産の炭水化物が豊富なイモ類で、干ばつに強い救荒作物であり、タピオカパールの原料でもあります。',
     benefitsTitle: '主な効能',
@@ -47,6 +49,7 @@ const T = {
   en: {
     slideTitle: 'Your crunchy Cebu break',
     slideLead: 'Crispy cassava chips, made for beach days.',
+    slidePrev: 'Previous photo', slideNext: 'Next photo',
     aboutTitle: 'What is cassava?',
     aboutIntro: 'Cassava is a carb-rich root crop native to South America — a drought-hardy famine-reserve staple and the raw material for tapioca pearls.',
     benefitsTitle: 'Key benefits',
@@ -251,7 +254,55 @@ async function setupMarquee() {
       track.appendChild(img);
     }
   }
-  track.style.setProperty('--slides', names.length); // 장수가 늘어도 흐르는 속도는 일정하게
+  runMarquee(track);
+}
+
+// 슬라이드를 오른쪽 → 왼쪽으로 장당 9초 속도로 흘린다 (움직임 줄이기 설정이면 30초).
+// 마우스: 올리면 멈춤, 벗어나면 다시. 터치: 탭하면 멈춤/다시, 화면 밖으로 스크롤되면 다시.
+// 화살표: 한 장씩 부드럽게 이동 (멈춘 상태는 그대로 유지)
+function runMarquee(track) {
+  const marquee = track.closest('.marquee');
+  const secondsPerSlide = matchMedia('(prefers-reduced-motion: reduce)').matches ? 30 : 9;
+  const slideStep = () => track.querySelector('.slide').getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
+  let offset = 0;      // 왼쪽으로 이동한 거리(px). 화면에는 목록 한 벌 길이로 나눈 나머지를 쓴다
+  let paused = false;
+  let tween = null;    // 화살표 이동 중: { from, to, start }
+  let last = null;
+
+  function frame(now) {
+    if (last !== null) {
+      if (tween) {
+        const p = Math.min(1, (now - tween.start) / 450);
+        offset = tween.from + (tween.to - tween.from) * (1 - (1 - p) ** 3);
+        if (p === 1) tween = null;
+      } else if (!paused) {
+        offset += (slideStep() / secondsPerSlide) * ((now - last) / 1000);
+      }
+      const loop = track.scrollWidth / 2;
+      track.style.transform = `translateX(${-(((offset % loop) + loop) % loop)}px)`;
+    }
+    last = now;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    marquee.addEventListener('mouseenter', () => { paused = true; });
+    marquee.addEventListener('mouseleave', () => { paused = false; });
+  } else {
+    marquee.addEventListener('click', () => { paused = !paused; });
+    new IntersectionObserver(([entry]) => { if (!entry.isIntersecting) paused = false; }).observe(marquee);
+  }
+
+  marquee.querySelectorAll('.marquee-nav').forEach((btn) => {
+    btn.hidden = false;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation(); // 터치 화면에서 화살표를 눌러도 멈춤/다시가 바뀌지 않게
+      const dir = btn.classList.contains('next') ? 1 : -1;
+      const from = offset;
+      tween = { from, to: (tween ? tween.to : from) + dir * slideStep(), start: performance.now() };
+    });
+  });
 }
 
 // TOP 버튼: 한 화면 이상 내려가면 표시

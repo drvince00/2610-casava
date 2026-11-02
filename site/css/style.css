@@ -77,13 +77,20 @@ a:hover { color: var(--red); }
 
 /* ===== Slides (right → left marquee) ===== */
 .slides-section { padding: 64px 0 72px; border-bottom: 4px solid var(--ink); overflow: hidden; }
-.marquee { margin-top: 36px; overflow: hidden; padding: 6px 0 14px; }
-.marquee-track { display: flex; gap: 24px; width: max-content; animation: marquee calc(var(--slides, 4) * 9s) linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+/* 움직임은 js/main.js setupMarquee() 가 transform 으로 직접 준다 (일시정지 · 화살표 이동 때문에 CSS 애니메이션 대신) */
+.marquee { position: relative; margin-top: 36px; overflow: hidden; padding: 6px 0 14px; }
+.marquee-track { display: flex; gap: 24px; width: max-content; will-change: transform; }
 .slide { width: 280px; height: 280px; flex: none; object-fit: cover; border: 5px solid var(--ink); border-radius: 18px; box-shadow: 6px 6px 0 var(--ink); background: var(--yellow); }
 @media (min-width: 768px) { .slide { width: 400px; height: 400px; } }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation-duration: calc(var(--slides, 4) * 30s); } }
+.marquee-nav { position: absolute; top: 50%; z-index: 2; width: 48px; height: 48px; margin-top: -28px; padding: 0; display: flex; align-items: center; justify-content: center; background: var(--cream); border: 4px solid var(--ink); border-radius: 50%; box-shadow: 4px 4px 0 var(--ink); cursor: pointer; }
+.marquee-nav:hover { background: var(--yellow); }
+.marquee-nav:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.marquee-nav:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+.marquee-nav[hidden] { display: none; }
+.marquee-nav svg { width: 18px; height: 18px; fill: var(--ink); }
+.marquee-nav.prev { left: 12px; }
+.marquee-nav.next { right: 12px; }
+@media (min-width: 768px) { .marquee-nav { width: 56px; height: 56px; } .marquee-nav.prev { left: 24px; } .marquee-nav.next { right: 24px; } }
 
 /* ===== About cassava ===== */
 .about-card { margin-top: 56px; background: #fff; border: 4px solid var(--ink); border-radius: 24px; box-shadow: 8px 8px 0 var(--ink); padding: clamp(24px, 4vw, 48px); }

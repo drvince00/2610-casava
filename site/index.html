@@ -63,6 +63,12 @@
       <p class="lead bold-gothic" data-i18n="slideLead"></p>
     </div>
     <div class="marquee" aria-label="Gallery">
+      <button type="button" class="marquee-nav prev" data-i18n-aria="slidePrev" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3.5v17L4 12z"/></svg>
+      </button>
+      <button type="button" class="marquee-nav next" data-i18n-aria="slideNext" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5v17L20 12z"/></svg>
+      </button>
       <div class="marquee-track">
         <!-- 슬라이드는 data/slides.json 목록을 JS가 매번 섞어서 채운다. 이미지 교체: images/slides-src 에 넣고 npm run images -->
       </div>
